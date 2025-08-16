@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import "./App.css";
 
-function App() {
+import CourseTypes from "./components/CourseTypes";
+import Courses from "./components/Courses";
+import CourseOfferings from "./components/CourseOfferings";
+import StudentRegistrations from "./components/StudentRegistrations";
+import Navbar from "./components/Navbar";
+
+export default function App() {
+  const [courseTypes, setCourseTypes] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [offerings, setOfferings] = useState([]);
+  const [registrations, setRegistrations] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="p-6 grid grid-cols-2 gap-6">
+      <Navbar/>
+      <CourseTypes courseTypes={courseTypes} setCourseTypes={setCourseTypes} />
+      <Courses courses={courses} setCourses={setCourses} courseTypes={courseTypes} />
+      <CourseOfferings offerings={offerings} setOfferings={setOfferings} courses={courses} />
+      <StudentRegistrations
+        registrations={registrations}
+        setRegistrations={setRegistrations}
+        offerings={offerings}
+      />
     </div>
   );
 }
-
-export default App;
